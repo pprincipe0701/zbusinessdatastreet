@@ -1,0 +1,241 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="nebula.com.zformulario.controller.Main" xmlns:vbm='sap.ui.vbm' xmlns:l="sap.ui.layout" xmlns:uxap="sap.uxap" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
+    <uxap:ObjectPageLayout id="_IDGenObjectPageLayout1" showTitleInHeaderContent="false" showHeaderContent="true" showAnchorBar="true" showFooter="true" subSectionLayout="TitleOnTop">
+        <uxap:headerContent />
+        <uxap:headerTitle>
+            <uxap:ObjectPageHeader
+                id="_IDGenObjectPageHeader1"
+                objectImageURI=""
+                objectTitle="{Description}"
+                objectSubtitle="{Type}"
+                headerDesign="Light"
+                objectImageShape="Square"
+                isObjectIconAlwaysVisible="false"
+                isObjectTitleAlwaysVisible="true"
+                isObjectSubtitleAlwaysVisible="true"
+                isActionAreaAlwaysVisible="true"
+            >
+                <uxap:actions />
+                <uxap:breadCrumbsLinks />
+                <uxap:navigationBar />
+            </uxap:ObjectPageHeader>
+        </uxap:headerTitle>
+        <uxap:sections>
+            <uxap:ObjectPageSection id="mvSection" title="ESTABLECIMIENTO">
+                <uxap:ObjectPageSubSection id="mvSubSection">
+                    <VBox id="mvVbox">
+                        <form:Form id="_IDGenForm1mv" width="100%" editable="true" visible="true">
+                            <form:formContainers>
+                                <form:FormContainer id="_IDGenFormContainer1mv" visible="true">
+                                    <form:formElements>
+                                        <form:FormElement id="_IDGenFormElement1mv" visible="true">
+                                            <form:label>
+                                                <Label id="_IDGenLabel1mv" text="Distrito" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                            </form:label>
+                                            <form:fields>
+                                                <ComboBox id="id_distrito" selectedKey="{/idDistrito}" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%" items="{modelParam>/listaDistrito}" selectionChange="selectDistrito">
+                                                    <items>
+                                                        <core:Item id="_IDGenItem1" key="{modelParam>ID}" text="{modelParam>description}" />
+                                                    </items>
+                                                </ComboBox>
+                                                 <ComboBox id="id_zona" selectedKey="{/idMasterZona}" editable="true" enabled="true" placeholder="Escoga una Zona" visible="true" width="auto" valueState="None" maxWidth="100%" items="{modelParam3>/listaZona}">
+                                                    <items>
+                                                        <core:Item id="_IDGenItem19" key="{modelParam3>ID}" text="{modelParam3>description}" />
+                                                    </items>
+                                                </ComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement id="_IDGenFormElement2mv" visible="true">
+                                            <form:label>
+                                                <Label id="_IDGenLabel2mv" text="Razón Social" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                            </form:label>
+                                            <form:fields>
+                                                <Input id="id_razon_social" value="{/razonSocial}" type="Text" showValueHelp="true" valueHelpIconSrc="sap-icon://search" valueHelpRequest="onSearchEmpresa" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" liveChange="onLiveChange" />
+                                                <Input id="id_direccion" value="{/direccion}" type="Text" placeholder="Dirección" showValueHelp="false" enabled="true" required="true" width="auto" valueHelpOnly="false" valueStateText="Invalid entry" maxLength="0" liveChange="onLiveChange" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement id="_IDGenFormElement3mv" visible="true">
+                                            <form:label>
+                                                <Label id="_IDGenLabel3mv" text="Horario Atención" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                            </form:label>
+                                            <form:fields>
+                                                <!--<DatePicker id="id_horario_apertura" value="{path: 'horarioApertura', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'medium' }}" width="auto" displayFormat="medium" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="yyyyMMdd"/>-->
+                                                <!--<Input id="id_horario_apertura" value="{/horarioApertura}" type="Text" placeholder="Horario Apertura" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" />-->
+                                                <!--<Input id="id_horario_cierre" value="{/horarioCierre}" type="Text" placeholder="Horario Cierre" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="true" valueStateText="Invalid entry" maxLength="0" />-->
+                                                <TimePicker id="id_horario_apertura" value="{/horarioApertura}" valueFormat="HH:mm" displayFormat="HH:mm" change="handleChange" maskMode="On" placeholder="Horario Apertura" />
+                                                <TimePicker id="id_horario_cierre" value="{/horarioCierre}" valueFormat="HH:mm" displayFormat="HH:mm" change="handleChange" maskMode="On" placeholder="Horario Cierre" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement id="_IDGenFormElement1mv2" visible="true">
+                                            <form:label>
+                                                <Label id="_IDGenLabel1mv2" text="Rubro" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                            </form:label>
+                                            <form:fields>
+                                                <ComboBox id="id_rubro" selectedKey="{/idRubro}" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%" items="{modelParam>/listaRubro}" selectionChange="selectRubro">
+                                                    <items>
+                                                        <core:Item id="_IDGenItem1mv2" key="{modelParam>ID}" text="{modelParam>description}" />
+                                                    </items>
+                                                </ComboBox>
+                                                <Input
+                                                    id="id_otro_rubro"
+                                                    value="{/otroRubro}"
+                                                    type="Text"
+                                                    placeholder="Especifique Rubro"
+                                                    showValueHelp="false"
+                                                    enabled="true"
+                                                    visible="{/visibleTextoRubro}"
+                                                    width="auto"
+                                                    valueHelpOnly="false"
+                                                    required="false"
+                                                    valueStateText="Invalid entry"
+                                                    maxLength="0"
+                                                    liveChange="onLiveChange"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                    <form:title />
+                                </form:FormContainer>
+                            </form:formContainers>
+                            <form:layout>
+                                <form:ResponsiveGridLayout id="_IDGenResponsiveGridLayout1mv" adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12" />
+                            </form:layout>
+                        </form:Form>
+                    </VBox>
+                </uxap:ObjectPageSubSection>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection id="mvSection3" title="MOVIMIENTO DIARIO">
+                <uxap:ObjectPageSubSection id="mvSubSection3">
+                    <VBox id="mvVbox3">
+                        <form:Form id="_IDGenForm1mv3" width="100%" editable="true" visible="true">
+                            <form:formContainers>
+                                <form:FormContainer id="_IDGenFormContainer1mv3" visible="true">
+                                    <form:formElements>
+                                        <form:FormElement id="_IDGenFormElement1mv3" visible="true">
+                                            <form:label>
+                                                <Label id="_IDGenLabel1mv3" text="Afluencia" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                            </form:label>
+                                            <form:fields>
+                                                <ComboBox id="id_afluencia" selectedKey="{/idAfluencia}" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%" items="{modelParam>/listaAfluencia}">
+                                                    <items>
+                                                        <core:Item id="_IDGenItem1mv3" key="{modelParam>ID}" text="{modelParam>description}" />
+                                                    </items>
+                                                </ComboBox>
+                                                <ComboBox id="id_tipo_publico" selectedKey="{/idTipoPublico}" editable="true" placeholder="Tipo Publico" enabled="true" required="true" width="auto" valueState="None" maxWidth="100%" items="{modelParam>/listaTipoPublico}">
+                                                    <items>
+                                                        <core:Item id="_IDGenItem1mv34" key="{modelParam>ID}" text="{modelParam>description}" />
+                                                    </items>
+                                                </ComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement id="_IDGenFormElement1mv35" visible="true">
+                                            <form:label>
+                                                <Label id="_IDGenLabel1mv35" text="Estación" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                            </form:label>
+                                            <form:fields>
+                                                <ComboBox id="id_estacion" selectedKey="{/idEstacion}" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%" items="{modelParam>/listaEstacion}" selectionChange="poblarComboTemporada">
+                                                    <items>
+                                                        <core:Item id="_IDGenItem1mv35" key="{modelParam>ID}" text="{modelParam>description}" />
+                                                    </items>
+                                                </ComboBox>
+                                                <ComboBox id="id_estacion_temporada" selectedKey="{/idEstacionTemporada}" placeholder="Temporada" editable="true" enabled="true" required="true" width="auto" valueState="None" maxWidth="100%" items="{modelParam2>/listaTemporada}">
+                                                    <items>
+                                                        <core:Item id="_IDGenItem1mv345" key="{modelParam2>ID}" text="{modelParam2>descripcionTemporada}" />
+                                                    </items>
+                                                </ComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement id="_IDGenFormElement1mv35_" visible="true">
+                                            <form:label>
+                                                <Label id="_IDGenLabel1mv35_" text="Nivel Competencia" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                            </form:label>
+                                            <form:fields>
+                                                <ComboBox id="id_nivel_competencia" selectedKey="{/idNivelCompetencia}" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%" items="{modelParam>/listaNivelCompetencia}">
+                                                    <items>
+                                                        <core:Item id="_IDGenItem1mv35_" key="{modelParam>ID}" text="{modelParam>description}" />
+                                                    </items>
+                                                </ComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement id="_IDGenFormElement1mv356" visible="true">
+                                            <form:label>
+                                                <Label id="_IDGenLabel1mv356" text="Observación" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                            </form:label>
+                                            <form:fields>
+                                                <TextArea id="id_observacion" value="{/observacionGeneral}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement id="_IDGenFormElement1mv3567" visible="true">
+                                            <form:label>
+                                                <Label id="_IDGenLabel1mv3567" text="" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                            </form:label>
+                                            <form:fields>
+                                                <CheckBox id="id_financiera" text="Institución Financiera Cerca?" selected="{/flagFinanciera}" />
+                                                <Input id="id_obs_financiera" value="{/obsFinanciera}" type="Text" showValueHelp="false" enabled="true" visible="{/flagFinanciera}" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement id="_IDGenFormElement1mv35678" visible="true">
+                                            <form:label>
+                                                <Label id="_IDGenLabel1mv35678" text="" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                            </form:label>
+                                            <form:fields>
+                                                <CheckBox id="id_centro_educativo" text="Institución Educativa Cerca?" selected="{/flagCentroEducativo}" />
+                                                <Input id="id_obs_centro_educativo" value="{/obsCentroEducativo}" type="Text" showValueHelp="false" enabled="true" visible="{/flagCentroEducativo}" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement id="_IDGenFormElement1mv356789" visible="true">
+                                            <form:label>
+                                                <Label id="_IDGenLabel1mv356789" text="" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                            </form:label>
+                                            <form:fields>
+                                                <CheckBox id="id_centro_salud" text="Centro de Salud Cerca?" selected="{/flagCentroSalud}" />
+                                                <Input id="id_obs_centro_salud" value="{/obsCentroSalud}" type="Text" showValueHelp="false" enabled="true" visible="{/flagCentroSalud}" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement id="_IDGenFormElement1mv35678910" visible="true">
+                                            <form:label>
+                                                <Label id="_IDGenLabel1mv35678910" text="" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                            </form:label>
+                                            <form:fields>
+                                                <CheckBox id="id_iglesia" text="Centro Religioso Cerca?" selected="{/flagIglesia}" />
+                                                <Input id="id_obs_iglesia" value="{/obsIglesia}" type="Text" showValueHelp="false" enabled="true" visible="{/flagIglesia}" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement id="_IDGenFormElement1mv356789101" visible="true">
+                                            <form:label>
+                                                <Label id="_IDGenLabel1mv356789101" text="" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                            </form:label>
+                                            <form:fields>
+                                                <CheckBox id="id_alquiler" text="Existe Local para Alquiler?" selected="{/flagAlquiler}" />
+                                                <Input id="id_obs_alquiler" value="{/obsIglesia}" type="Text" showValueHelp="false" enabled="true" visible="{/flagAlquiler}" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                    <form:title />
+                                </form:FormContainer>
+                            </form:formContainers>
+                            <form:layout>
+                                <form:ResponsiveGridLayout id="_IDGenResponsiveGridLayout1mv3" adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12" />
+                            </form:layout>
+                        </form:Form>
+                    </VBox>
+                </uxap:ObjectPageSubSection>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection id="mapSection" title="UBICACION MAPA">
+                <uxap:ObjectPageSubSection id="mapSubSection">
+                    <VBox id="mapVbox">
+                        <vbm:GeoMap id="vbi" width="100%" />
+                    </VBox>
+                </uxap:ObjectPageSubSection>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+        <uxap:footer>
+            <OverflowToolbar id="_IDGenOverflowToolbar1" width="100%" height="auto" design="Auto" enabled="true" visible="true">
+                <content>
+                    <ToolbarSpacer id="_IDGenToolbarSpacer1" width="" />
+                    <Button id="_IDGenButton1" text="Guardar" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onValidar" />
+                    <Button id="_IDGenButton2" text="Limpiar" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onClear" />
+                </content>
+            </OverflowToolbar>
+        </uxap:footer>
+    </uxap:ObjectPageLayout>
+</mvc:View>
