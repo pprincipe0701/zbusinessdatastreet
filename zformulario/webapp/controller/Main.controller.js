@@ -10,7 +10,7 @@ sap.ui.define([
 
         return Controller.extend("nebula.com.zformulario.controller.Main", {
             onInit: function () {
-                MessageBox.warning('Cuidado que te roben el móvil, llena con precaución');
+                MessageBox.warning('Cuidado que te roben el móvil, llena con precaucixyz_z');
                 this.poblarCombos();
                 this.generarModelo();
                 this.getPointCoordinates();
