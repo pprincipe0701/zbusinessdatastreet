@@ -1,6 +1,13 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="nebula.com.zformulario.controller.Main" xmlns:vbm='sap.ui.vbm' xmlns:l="sap.ui.layout" xmlns:uxap="sap.uxap" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="nebula.com.zformulario.controller.Main" xmlns:vbm="sap.ui.vbm" xmlns:l="sap.ui.layout" xmlns:uxap="sap.uxap" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
     <uxap:ObjectPageLayout id="_IDGenObjectPageLayout1" showTitleInHeaderContent="false" showHeaderContent="true" showAnchorBar="true" showFooter="true" subSectionLayout="TitleOnTop">
-        <uxap:headerContent />
+        <uxap:headerContent>
+            <l:HorizontalLayout id="_IDGenHorizontalLayout1" class="sapUiContentPadding" >
+            <CheckBox id="id_cbx_location_current" text="Ubicación Actual" select=".onChangeLocationCurrent"/>                      
+            <Input id="id_txt_ticket" value="{/codigoTicket}" type="Text" placeholder="Ingresa Ticket" submit=".verTicket"/>
+            <Button id="id_btn_ver_ticket" text="Validar Ticket" type="Accept" icon="sap-icon://map-2" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press=".verTicket" />
+        </l:HorizontalLayout>
+        </uxap:headerContent>
+
         <uxap:headerTitle>
             <uxap:ObjectPageHeader
                 id="_IDGenObjectPageHeader1"
@@ -14,7 +21,12 @@
                 isObjectSubtitleAlwaysVisible="true"
                 isActionAreaAlwaysVisible="true"
             >
-                <uxap:actions />
+                
+            <uxap:actions>					
+                <Button id="_IDGenButton1" text="Guardar" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onValidar" />
+                    <Button id="_IDGenButton101" text="Limpiar" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onClear" />					
+            </uxap:actions>
+
                 <uxap:breadCrumbsLinks />
                 <uxap:navigationBar />
             </uxap:ObjectPageHeader>
@@ -228,7 +240,8 @@
                 </uxap:ObjectPageSubSection>
             </uxap:ObjectPageSection>
         </uxap:sections>
-        <uxap:footer>
+        <uxap:footer></uxap:footer>
+        <!--<uxap:footer>
             <OverflowToolbar id="_IDGenOverflowToolbar1" width="100%" height="auto" design="Auto" enabled="true" visible="true">
                 <content>
                     <ToolbarSpacer id="_IDGenToolbarSpacer1" width="" />
@@ -236,6 +249,6 @@
                     <Button id="_IDGenButton2" text="Limpiar" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onClear" />
                 </content>
             </OverflowToolbar>
-        </uxap:footer>
+        </uxap:footer>-->
     </uxap:ObjectPageLayout>
 </mvc:View>

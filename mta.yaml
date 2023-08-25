@@ -50,6 +50,10 @@ modules:
       - nebulacomzreportegeneral.zip
       name: nebulacomzreportegeneral
       target-path: resources/
+    - artifacts:
+      - nebulacomzticket.zip
+      name: nebulacomzticket
+      target-path: resources/
 - name: nebulacomzformulario
   type: html5
   path: zformulario
@@ -63,6 +67,16 @@ modules:
 - name: nebulacomzreportegeneral
   type: html5
   path: zreportegeneral
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: nebulacomzticket
+  type: html5
+  path: zticket
   build-parameters:
     build-result: dist
     builder: custom
