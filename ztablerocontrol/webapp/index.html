@@ -1,38 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Formulario Captura de datos</title>
+    <title>Tablero Control</title>
     <style>
         html, body, body > div, #container, #container-uiarea {
             height: 100%;
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
     <script
         id="sap-ui-bootstrap"
         src="resources/sap-ui-core.js"
-        data-sap-ui-theme="sap_bluecrystal"
+        data-sap-ui-theme="sap_horizon"
         data-sap-ui-resourceroots='{
-            "nebula.com.zformulario": "./"
+            "nebula.com.ztablerocontrol": "./"
         }'
+        data-sap-ui-oninit="module:sap/ui/core/ComponentSupport"
         data-sap-ui-compatVersion="edge"
         data-sap-ui-async="true"
         data-sap-ui-frameOptions="trusted"
     ></script>
-    <script id="locate-reuse-libs" src="./utils/locate-reuse-libs.js"
-        data-sap-ui-manifest-uri="./manifest.json"
-        data-sap-ui-componentName="nebula.com.zformulario">
-    </script> 
 </head>
 <body class="sapUiBody sapUiSizeCompact" id="content">
     <div
         data-sap-ui-component
-        data-name="nebula.com.zformulario"
+        data-name="nebula.com.ztablerocontrol"
         data-id="container"
-        data-settings='{"id" : "nebula.com.zformulario"}'
+        data-settings='{"id" : "nebula.com.ztablerocontrol"}'
         data-handle-validation="true"
     ></div>
 </body>

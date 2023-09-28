@@ -1,0 +1,52 @@
+<!--<ToolbarSpacer id="idToolbarSpacer" width="5px"/>-->
+<core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<Dialog id="idDialogSeachRazon" horizontalScrolling="false" showHeader="true" state="None" stretch="false" title="Buscar Empresa" contentWidth="800px">
+		<buttons>
+			<Button id="IdButtonClose" text="Cancelar" type="Reject" press="onCloseSearchEmpresa"/>
+		</buttons>
+		
+		<Table id="tablaSeach" width="auto" noDataText="No data" itemPress="onEmpresaSeleccionada" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="false" class="sapUiResponsiveMargin" items="{modelEstablecimiento>/listaEstablecimiento}">
+					
+			<headerToolbar>
+				<Toolbar id="idToolbar" width="auto" height="40px" design="Transparent" visible="true" enabled="true">
+					<content>
+						<SearchField id="IdSearchField" width="100%" placeholder="Buscar..." search="onFiltrarEmpresa" liveChange=""/>
+						
+					</content>
+					<tooltip/>
+				</Toolbar>
+			</headerToolbar>
+
+			<columns>
+				
+				<Column id="colRazonSocial"  hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+					<Text id="txtColRazonSocial" text="Nombre o Razon Social"  maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+				</Column>
+				<Column id="colDistrito" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+					<Text id="txtColDistrito" text="Distrito" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+				</Column>
+				<Column id="colZona" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+					<Text id="txtColZona" text="Zona" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+				</Column>
+				<Column id="colRubro" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+					<Text id="txtColRubro" text="Rubro" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+				</Column>
+				<Column id="colDireccion" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+					<Text id="txtColDireccion" text="Direccion" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem id="idColListItem" type="Active" press="selectRow">
+					<cells>
+						<Text id="rowColRazonSocial" text="{modelEstablecimiento>razonSocial}" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+						<Text id="rowColDistrito" text="{modelEstablecimiento>descripcionDistrito}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+						<Text id="rowColZona" text="{modelEstablecimiento>descripcionZona}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+						<Text id="rowColRubro" text="{modelEstablecimiento>descripcionRubro}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+						<Text id="rowColDireccion" text="{modelEstablecimiento>direccion}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+
+	</Dialog>
+</core:FragmentDefinition>

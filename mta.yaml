@@ -54,6 +54,10 @@ modules:
       - nebulacomzticket.zip
       name: nebulacomzticket
       target-path: resources/
+    - artifacts:
+      - nebulacomztablerocontrol.zip
+      name: nebulacomztablerocontrol
+      target-path: resources/
 - name: nebulacomzformulario
   type: html5
   path: zformulario
@@ -77,6 +81,16 @@ modules:
 - name: nebulacomzticket
   type: html5
   path: zticket
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: nebulacomztablerocontrol
+  type: html5
+  path: ztablerocontrol
   build-parameters:
     build-result: dist
     builder: custom

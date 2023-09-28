@@ -1,10 +1,17 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="nebula.com.zformulario.controller.Main" xmlns:vbm="sap.ui.vbm" xmlns:l="sap.ui.layout" xmlns:uxap="sap.uxap" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
+<mvc:View  controllerName="nebula.com.zformulario.controller.Main" xmlns:mvc="sap.ui.core.mvc" xmlns:vbm="sap.ui.vbm" xmlns:l="sap.ui.layout" xmlns:uxap="sap.uxap" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m" >
     <uxap:ObjectPageLayout id="_IDGenObjectPageLayout1" showTitleInHeaderContent="false" showHeaderContent="true" showAnchorBar="true" showFooter="true" subSectionLayout="TitleOnTop">
         <uxap:headerContent>
             <l:HorizontalLayout id="_IDGenHorizontalLayout1" class="sapUiContentPadding" >
-            <CheckBox id="id_cbx_location_current" text="Ubicación Actual" select=".onChangeLocationCurrent"/>                      
-            <Input id="id_txt_ticket" value="{/codigoTicket}" type="Text" placeholder="Ingresa Ticket" submit=".verTicket"/>
-            <Button id="id_btn_ver_ticket" text="Validar Ticket" type="Accept" icon="sap-icon://map-2" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press=".verTicket" />
+            <CheckBox id="id_cbx_location_current" text="Ubic. Actual" select=".onChangeLocationCurrent" selected="false" width="{= ${device>/system/phone} === true ? '4em' : '10em' }"/>                      
+            <Input id="id_txt_ticket" value="{/codigoTicket}" type="Text" placeholder="Ingresa Ticket" submit=".verTicket" width="{= ${device>/system/phone} === true ? '4em' : '10em' }"/>
+            <Button id="id_btn_ver_ticket" text="Validar Ticket" type="Accept" icon="sap-icon://map-2" iconFirst="true" enabled="true" visible="true" iconDensityAware="false" press=".verTicket" width="{= ${device>/system/phone} === true ? '4em' : '10em' }"/>
+<!--
+            <Label id="idLblDate" text="Fecha de Registro" />
+			<DatePicker id="idDatePiker" value="{ 
+                path: '/fechaRegistro',
+				type: 'sap.ui.model.type.Date'}" change=".cambiaFecha" />
+            <Input id="idTxtHora" value="{/horaRegistro}" type="Text" placeholder="23:59" liveChange=".formatHora" />
+-->            
         </l:HorizontalLayout>
         </uxap:headerContent>
 
@@ -24,7 +31,7 @@
                 
             <uxap:actions>					
                 <Button id="_IDGenButton1" text="Guardar" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onValidar" />
-                    <Button id="_IDGenButton101" text="Limpiar" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onClear" />					
+                <Button id="_IDGenButton101" text="Limpiar" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onClear" />					
             </uxap:actions>
 
                 <uxap:breadCrumbsLinks />
@@ -61,7 +68,7 @@
                                                 <Label id="_IDGenLabel2mv" text="Razón Social" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true" />
                                             </form:label>
                                             <form:fields>
-                                                <Input id="id_razon_social" value="{/razonSocial}" type="Text" showValueHelp="true" valueHelpIconSrc="sap-icon://search" valueHelpRequest="onSearchEmpresa" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" liveChange="onLiveChange" />
+                                                <Input id="id_razon_social" value="{/razonSocial}" type="Text" showValueHelp="true" valueHelpIconSrc="sap-icon://search" valueHelpRequest="onSearchEmpresa" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" liveChange="onLiveChangeRazon" />
                                                 <Input id="id_direccion" value="{/direccion}" type="Text" placeholder="Dirección" showValueHelp="false" enabled="true" required="true" width="auto" valueHelpOnly="false" valueStateText="Invalid entry" maxLength="0" liveChange="onLiveChange" />
                                             </form:fields>
                                         </form:FormElement>
