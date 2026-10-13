@@ -41,7 +41,11 @@ sap.ui.define(
         //this.getPointCoordinates();
         this.currentPosition = "";
         this.getCurrentPositionInitial();
-
+        var oDataUI = {
+            isEditable: true
+        };
+        var oModelUI = new sap.ui.model.json.JSONModel(oDataUI);
+        this.getView().setModel(oModelUI, "ui");
 
       },
       obtenerCoordenadasActuales: function () {
@@ -61,16 +65,16 @@ sap.ui.define(
 
         oView.byId("id_txt_ticket").setVisible(true);
         oView.byId("id_btn_ver_ticket").setVisible(true);
-        oView.byId("idLblDate").setVisible(true);
-        oView.byId("idDatePiker").setVisible(true);
-        oView.byId("idTxtHora").setVisible(true);
+        //oView.byId("idLblDate").setVisible(true);
+        //oView.byId("idDatePiker").setVisible(true);
+        //oView.byId("idTxtHora").setVisible(true);
 
         if (this.getView().byId("id_cbx_location_current").getSelected()) {
           oView.byId("id_txt_ticket").setVisible(false);
           oView.byId("id_btn_ver_ticket").setVisible(false);
-          oView.byId("idLblDate").setVisible(false);
-          oView.byId("idDatePiker").setVisible(false);
-          oView.byId("idTxtHora").setVisible(false);
+          //oView.byId("idLblDate").setVisible(false);
+          //oView.byId("idDatePiker").setVisible(false);
+          //oView.byId("idTxtHora").setVisible(false);
           data.codigoTicket = "";
           //this.getCurrentPositionGlobal();
           //this.changePositionLocation(this.latitudeG, this.longitudeG);
@@ -157,7 +161,7 @@ sap.ui.define(
 
         //validar si el ticket fue usado
         var url_data =
-          "./backend_mov/service/zbusiness/MovimientosDiarios?$filter=codigoTicket eq '" +
+          "./backend_mov/odata/v4/service/zbusiness/MovimientosDiarios?$filter=codigoTicket eq '" +
           data.codigoTicket +
           "'";
 
@@ -385,7 +389,21 @@ sap.ui.define(
 
         oJsonModel.setData(objAux);
         oView.setModel(oJsonModel);
+        
         //oView.getModel.refresh(true);
+      },
+      nuevoEstablecimiento: function () {
+        //jvergaray
+        this.getView().getModel().setProperty("/idDistrito", "");
+        this.getView().getModel().setProperty("/idMasterZona", "");
+        this.getView().getModel().setProperty("/razonSocial", "");
+        this.getView().getModel().setProperty("/direccion", "");
+        this.getView().getModel().setProperty("/horarioApertura", "");
+        this.getView().getModel().setProperty("/horarioCierre", "");
+        this.getView().getModel().setProperty("/idRubro", "");
+        this.getView().getModel().setProperty("/otroRubro", "");
+        this.getView().getModel("ui").setProperty("/isEditable", true);
+        this.selectRubro();
       },
       onSearchEmpresa: function (evt) {
         //Proceso de Carga de tabla en popup
@@ -394,7 +412,7 @@ sap.ui.define(
         var oJsonModelEstablecimiento = new sap.ui.model.json.JSONModel();
         
         //llAMAR AL SERVICIO QUE LISTA LOS ESTABLECIMIENTOS
-        var url_data = "./backend_mov/service/zbusiness/EstablecimientoView";
+        var url_data = "./backend_mov/odata/v4/service/zbusiness/EstablecimientoView";
         /* var url_data =
            "/c691e839-9871-42b8-b6c7-11a6a397783d.zbusinessdatastreet.nebulacomzformulario-0.0.1/backend_mov/service/zadmin/MasterEstacionesTemporadas?$filter=idEstacion eq " +
            idEstacion;*/
@@ -480,8 +498,10 @@ sap.ui.define(
         oView.byId('id_zona').setSelectedKey(id_zona);
         oView.byId('id_direccion').setValue(id_direccion);
         oView.byId('id_rubro').setSelectedKey(idRubro);
+        this.selectRubro();
         oView.byId('id_horario_apertura').setValue(horaInicio);
         oView.byId('id_horario_cierre').setValue(horaFinal);
+        this.getView().getModel("ui").setProperty("/isEditable", false);
         this.onCloseSearchEmpresa();
 
 
@@ -535,7 +555,7 @@ sap.ui.define(
            "/c691e839-9871-42b8-b6c7-11a6a397783d.zbusinessdatastreet.nebulacomzformulario-0.0.1/backend_mov/service/zadmin/MasterZonas?$filter=masterDistrito_ID eq " +
            idDistrito +
            " and status eq '1'";*/
-        var url_data = "./backend_mov/service/zadmin/MasterZonas?$filter=masterDistrito_ID eq " + idDistrito + " and status eq '1'";
+        var url_data = "./backend_mov/odata/v4/service/zadmin/MasterZonas?$filter=masterDistrito_ID eq " + idDistrito + " and status eq '1'";
 
         var aData = jQuery
           .ajax({
@@ -837,7 +857,7 @@ sap.ui.define(
       },
       getdataTicket: function (codigoTicket) {
         var url_data =
-          "./backend_mov/service/zbusiness/MasterTicket?$filter=codigoTicket eq '" +
+          "./backend_mov/odata/v4/service/zbusiness/MasterTicket?$filter=codigoTicket eq '" +
           codigoTicket +
           "' and status eq '1'";
         var ticket = null;
@@ -869,7 +889,7 @@ sap.ui.define(
       },
       getCurrentUser: function (email) {
         var url_data =
-          "./backend_mov/service/zadmin/MasterUsuarios?$filter=usuarioBtp eq '" +
+          "./backend_mov/odata/v4/service/zadmin/MasterUsuarios?$filter=usuarioBtp eq '" +
           email +
           "' and status eq '1'";
         var idUsuario = 0;
@@ -906,7 +926,7 @@ sap.ui.define(
         var model = oView.getModel();
         var data = model.getData();
         var usrResponsable = "DESCONOCIDO";
-        var url_data = "./backend_mov/service/zbusiness/MovimientoDiarioCustom";
+        var url_data = "./backend_mov/odata/v4/service/zbusiness/MovimientoDiarioCustom";
         /*var url_data =
           "/c691e839-9871-42b8-b6c7-11a6a397783d.zbusinessdatastreet.nebulacomzformulario-0.0.1/backend_mov/service/zbusiness/MovimientoDiarioCustom";*/
 
@@ -940,7 +960,8 @@ sap.ui.define(
         objAux.direccion = data.direccion;
         objAux.horarioApertura = data.horarioApertura;
         objAux.horarioCierre = data.horarioCierre;
-        objAux.otroRubro = data.visibleTextoRubro ? data.otroRubro : "";
+        //objAux.otroRubro = data.visibleTextoRubro ? data.otroRubro : "";
+        objAux.otroRubro = data.otroRubro;
         objAux.coordenada = this.currentPosition;
         objAux.idRubro = parseInt(data.idRubro);
         objAux.idDistrito = parseInt(data.idDistrito);
@@ -1008,6 +1029,7 @@ sap.ui.define(
           onClose: function (sActionClicked) {
             if (sActionClicked === "OK") {
               self.generarModelo();
+              self.getView().getModel("ui").setProperty("/isEditable", true);
             }
           },
         });
@@ -1026,7 +1048,7 @@ sap.ui.define(
 
         var resultAll = [];
         var idEstacion = oView.byId("id_estacion").getSelectedKey();
-        var url_data = "./backend_mov/service/zadmin/MasterEstacionesTemporadas?$filter=idEstacion eq " + idEstacion;
+        var url_data = "./backend_mov/odata/v4/service/zadmin/MasterEstacionesTemporadas?$filter=idEstacion eq " + idEstacion;
         /* var url_data =
            "/c691e839-9871-42b8-b6c7-11a6a397783d.zbusinessdatastreet.nebulacomzformulario-0.0.1/backend_mov/service/zadmin/MasterEstacionesTemporadas?$filter=idEstacion eq " +
            idEstacion;*/
@@ -1070,11 +1092,9 @@ sap.ui.define(
         objAux.listaEstacion = [];
         objAux.listaNivelCompetencia = [];
         var resultAll = [];
-        var url_data = './backend_mov/service/zadmin/MasterData'
+        var url_data = './backend_mov/odata/v4/service/zadmin/MasterData?$orderby=ID asc'
         /*var url_data =
           "/c691e839-9871-42b8-b6c7-11a6a397783d.zbusinessdatastreet.nebulacomzformulario-0.0.1/backend_mov/service/zadmin/MasterData";*/
-
-
         var aData = jQuery
           .ajax({
             method: "GET",
@@ -1100,15 +1120,20 @@ sap.ui.define(
           //console.log('Index: ' + index + ' Value: ' + item);
           if (item.groupMaster === "MasterDistritos")
             objAux.listaDistrito.push(item);
-          if (item.groupMaster === "MasterRubros") objAux.listaRubro.push(item);
+          if (item.groupMaster === "MasterRubros") 
+            objAux.listaRubro.push(item);
+            objAux.listaRubro.sort((a,b) => a.ID - b.ID);
           if (item.groupMaster === "MasterAfluencias")
             objAux.listaAfluencia.push(item);
+            objAux.listaAfluencia.sort((a, b) => a.ID - b.ID);
           if (item.groupMaster === "MasterTipoPublicos")
             objAux.listaTipoPublico.push(item);
+            objAux.listaTipoPublico.sort((a, b) => a.ID - b.ID);
           if (item.groupMaster === "MasterEstaciones")
             objAux.listaEstacion.push(item);
           if (item.groupMaster === "MasterNivelCompetencias")
             objAux.listaNivelCompetencia.push(item);
+            objAux.listaNivelCompetencia.sort((a, b) => a.ID - b.ID);
         });
         oJsonModel.setData(objAux);
         oView.setModel(oJsonModel, "modelParam");
@@ -1125,7 +1150,7 @@ sap.ui.define(
         objAux.listaEstacion = [];
         objAux.listaNivelCompetencia = [];
         var resultAll = [];
-        var url_data = './backend_mov/service/zadmin/MasterData'
+        var url_data = './backend_mov/odata/v4/service/zadmin/MasterData?$orderby=ID asc'
         /*var url_data =
           "/c691e839-9871-42b8-b6c7-11a6a397783d.zbusinessdatastreet.nebulacomzformulario-0.0.1/backend_mov/service/zadmin/MasterData";*/
 

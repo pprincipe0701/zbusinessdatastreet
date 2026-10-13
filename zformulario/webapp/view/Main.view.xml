@@ -42,21 +42,22 @@
             <uxap:ObjectPageSection id="mvSection" title="ESTABLECIMIENTO">
                 <uxap:ObjectPageSubSection id="mvSubSection">
                     <VBox id="mvVbox">
+                        <Button id="BtnNuevo" text="Nuevo" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="nuevoEstablecimiento" />
                         <form:Form id="_IDGenForm1mv" width="100%" editable="true" visible="true">
                             <form:formContainers>
-                                <form:FormContainer id="_IDGenFormContainer1mv" visible="true">
+                                <form:FormContainer id="_IDGenFormContainer1mv" visible="true">      
                                     <form:formElements>
                                         <form:FormElement id="_IDGenFormElement1mv" visible="true">
                                             <form:label>
                                                 <Label id="_IDGenLabel1mv" text="Distrito" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true" />
                                             </form:label>
                                             <form:fields>
-                                                <ComboBox id="id_distrito" selectedKey="{/idDistrito}" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%" items="{modelParam>/listaDistrito}" selectionChange="selectDistrito">
+                                                <ComboBox id="id_distrito" selectedKey="{/idDistrito}" editable="{ui>/isEditable}" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%" items="{modelParam>/listaDistrito}" selectionChange="selectDistrito">
                                                     <items>
                                                         <core:Item id="_IDGenItem1" key="{modelParam>ID}" text="{modelParam>description}" />
                                                     </items>
                                                 </ComboBox>
-                                                 <ComboBox id="id_zona" selectedKey="{/idMasterZona}" editable="true" enabled="true" placeholder="Escoga una Zona" visible="true" width="auto" valueState="None" maxWidth="100%" items="{modelParam3>/listaZona}">
+                                                 <ComboBox id="id_zona" selectedKey="{/idMasterZona}" editable="{ui>/isEditable}" enabled="true" placeholder="Escoga una Zona" visible="true" width="auto" valueState="None" maxWidth="100%" items="{modelParam3>/listaZona}">
                                                     <items>
                                                         <core:Item id="_IDGenItem19" key="{modelParam3>ID}" text="{modelParam3>description}" />
                                                     </items>
@@ -68,20 +69,21 @@
                                                 <Label id="_IDGenLabel2mv" text="Razón Social" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true" />
                                             </form:label>
                                             <form:fields>
-                                                <Input id="id_razon_social" value="{/razonSocial}" type="Text" showValueHelp="true" valueHelpIconSrc="sap-icon://search" valueHelpRequest="onSearchEmpresa" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" liveChange="onLiveChangeRazon" />
-                                                <Input id="id_direccion" value="{/direccion}" type="Text" placeholder="Dirección" showValueHelp="false" enabled="true" required="true" width="auto" valueHelpOnly="false" valueStateText="Invalid entry" maxLength="0" liveChange="onLiveChange" />
+                                                <Input id="id_razon_social" value="{/razonSocial}" type="Text" showValueHelp="true" valueHelpIconSrc="sap-icon://search" valueHelpRequest="onSearchEmpresa" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" liveChange="onLiveChangeRazon" editable="{ui>/isEditable}" />
+                                                <!--<Input id="id_direccion" value="{/direccion}" type="Text" placeholder="Dirección" showValueHelp="false" enabled="true" required="true" width="auto" valueHelpOnly="false" valueStateText="Invalid entry" maxLength="0" liveChange="onLiveChange" />-->
+                                                <Input id="id_direccion" value="{/direccion}" type="Text" placeholder="Dirección" showValueHelp="false" enabled="true" required="true" width="auto" valueHelpOnly="false" valueStateText="Invalid entry" maxLength="0" editable="{ui>/isEditable}" />
                                             </form:fields>
                                         </form:FormElement>
                                         <form:FormElement id="_IDGenFormElement3mv" visible="true">
                                             <form:label>
-                                                <Label id="_IDGenLabel3mv" text="Horario Atención" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                <Label id="_IDGenLabel3mv" text="Horario Atención" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true"  />
                                             </form:label>
                                             <form:fields>
                                                 <!--<DatePicker id="id_horario_apertura" value="{path: 'horarioApertura', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'medium' }}" width="auto" displayFormat="medium" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="yyyyMMdd"/>-->
                                                 <!--<Input id="id_horario_apertura" value="{/horarioApertura}" type="Text" placeholder="Horario Apertura" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" />-->
                                                 <!--<Input id="id_horario_cierre" value="{/horarioCierre}" type="Text" placeholder="Horario Cierre" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="true" valueStateText="Invalid entry" maxLength="0" />-->
-                                                <TimePicker id="id_horario_apertura" value="{/horarioApertura}" valueFormat="HH:mm" displayFormat="HH:mm" change="handleChange" maskMode="On" placeholder="Horario Apertura" />
-                                                <TimePicker id="id_horario_cierre" value="{/horarioCierre}" valueFormat="HH:mm" displayFormat="HH:mm" change="handleChange" maskMode="On" placeholder="Horario Cierre" />
+                                                <TimePicker id="id_horario_apertura" value="{/horarioApertura}" valueFormat="HH:mm" displayFormat="HH:mm" change="handleChange" maskMode="On" placeholder="Horario Apertura" editable="{ui>/isEditable}" />
+                                                <TimePicker id="id_horario_cierre" value="{/horarioCierre}" valueFormat="HH:mm" displayFormat="HH:mm" change="handleChange" maskMode="On" placeholder="Horario Cierre" editable="{ui>/isEditable}" />
                                             </form:fields>
                                         </form:FormElement>
                                         <form:FormElement id="_IDGenFormElement1mv2" visible="true">
@@ -89,7 +91,7 @@
                                                 <Label id="_IDGenLabel1mv2" text="Rubro" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true" />
                                             </form:label>
                                             <form:fields>
-                                                <ComboBox id="id_rubro" selectedKey="{/idRubro}" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%" items="{modelParam>/listaRubro}" selectionChange="selectRubro">
+                                                <ComboBox id="id_rubro" selectedKey="{/idRubro}" editable="{ui>/isEditable}" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%" items="{modelParam>/listaRubro}" selectionChange="selectRubro">
                                                     <items>
                                                         <core:Item id="_IDGenItem1mv2" key="{modelParam>ID}" text="{modelParam>description}" />
                                                     </items>
@@ -107,7 +109,7 @@
                                                     required="false"
                                                     valueStateText="Invalid entry"
                                                     maxLength="0"
-                                                    liveChange="onLiveChange"
+                                                    editable="{ui>/isEditable}"
                                                 />
                                             </form:fields>
                                         </form:FormElement>
@@ -225,7 +227,7 @@
                                             </form:label>
                                             <form:fields>
                                                 <CheckBox id="id_alquiler" text="Existe Local para Alquiler?" selected="{/flagAlquiler}" />
-                                                <Input id="id_obs_alquiler" value="{/obsIglesia}" type="Text" showValueHelp="false" enabled="true" visible="{/flagAlquiler}" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" />
+                                                <Input id="id_obs_alquiler" value="{/obsAlquiler}" type="Text" showValueHelp="false" enabled="true" visible="{/flagAlquiler}" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" />
                                             </form:fields>
                                         </form:FormElement>
                                     </form:formElements>

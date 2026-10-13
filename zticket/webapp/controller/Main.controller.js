@@ -113,7 +113,7 @@ sap.ui.define([
                 objAux.horaRegistro = horaRegistro;
 
                 var jsonObject = JSON.stringify(objAux);
-                var url_data = "./backend_mov/service/zbusiness/MasterTicket";
+                var url_data = "./backend_mov/odata/v4/service/zbusiness/MasterTicket";
 
                 var aData2 = jQuery.ajax({
                     type: "POST",
@@ -138,7 +138,7 @@ sap.ui.define([
                 return letters[randomLetter].toUpperCase() + numbers;
             },
             getCurrentUser: function(email){
-                var url_data = "./backend_mov/service/zadmin/MasterUsuarios?$filter=usuarioBtp eq '" + email + "' and status eq '1'";
+                var url_data = "./backend_mov/odata/v4/service/zadmin/MasterUsuarios?$filter=usuarioBtp eq '" + email + "' and status eq '1'";
                 var idUsuario = 0;
                 var aData = jQuery.ajax({
                     method: 'GET',
