@@ -386,7 +386,6 @@ sap.ui.define(
         objAux.flagCentroSalud = false;
         objAux.flagIglesia = false;
         objAux.flagAlquiler = false;
-
         oJsonModel.setData(objAux);
         oView.setModel(oJsonModel);
         
@@ -720,7 +719,6 @@ sap.ui.define(
                 //this.onSave();
                 this.onReview();
               }
-
             }
 
           } else {
@@ -989,11 +987,18 @@ sap.ui.define(
           ? data.obsAlquiler
           : "";
         objAux.idMasterZona = parseInt(data.idMasterZona);
-        objAux.status = "1";
+        objAux.status = "0";
         objAux.idUsuario = parseInt(idUsuario);
-        objAux.observacionGeneral = !this.isEmpty(data.observacionGeneral)
-          ? data.observacionGeneral
-          : "";
+        objAux.observacionGeneral = !this.isEmpty(data.observacionGeneral) ? data.observacionGeneral: "";
+        let today = new Date(new Date().toUTCString());
+        let fechaRegistro = today.toISOString().slice(0, 10);
+        let horaRegistro = today.getHours() + ":" + today.getMinutes();
+        let fechaLocal = new Date(); 
+        let desfaseHorario = fechaLocal.getTimezoneOffset() * 60000; 
+        let fechaAjustada = new Date(fechaLocal.getTime() - desfaseHorario); 
+        objAux.fechaReg = fechaAjustada.toISOString().slice(0, -1);
+        objAux.fechaRegistro = fechaRegistro;
+        objAux.horaRegistro = horaRegistro;
         //var tt = '';
         //idEstablecimiento
 
@@ -1009,10 +1014,16 @@ sap.ui.define(
           async: false,
           data: jsonObject,
           success: function (data, textStatus, jqXHR) {
-            oGlobalBusyDialog.close();
-            //MessageBox.success('Los datos fueron Grabados correctamente');
-            //location.reload(true);
-            self.mensajeCierre();
+            if (data.type == 'E'){
+              oGlobalBusyDialog.close();
+              MessageBox.error(data.message);
+            }else{
+              oGlobalBusyDialog.close();
+              //MessageBox.success('Los datos fueron Grabados correctamente');
+              //location.reload(true);
+              self.mensajeCierre();
+            }
+            
           },
           error: function (xhr, readyState) {
             oGlobalBusyDialog.close();
@@ -1036,6 +1047,8 @@ sap.ui.define(
       },
       onClear: function (evt) {
         this.generarModelo();
+        this.nuevoEstablecimiento();
+        this.getCurrentPositionInitial();
       },
       poblarComboTemporada: function (evt) {
         var oView = this.getView();

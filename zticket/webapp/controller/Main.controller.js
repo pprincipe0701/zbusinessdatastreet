@@ -110,6 +110,16 @@ sap.ui.define([
                 objAux.status = '1';
                 objAux.masterUsuario_ID = this.getCurrentUser(email);
                 objAux.fechaRegistro = fechaRegistro;
+                // 1. Obtienes la fecha y hora local del dispositivo
+                let fechaLocal = new Date(); 
+                // 2. Calculas el desfase de la zona horaria local en milisegundos
+                let desfaseHorario = fechaLocal.getTimezoneOffset() * 60000; 
+                // 3. Ajustas el tiempo para que al generar el ISO mantenga los números de tu hora local
+                let fechaAjustada = new Date(fechaLocal.getTime() - desfaseHorario); 
+                //4. Asignas el valor formateado (se remueve la 'Z' para que CAP lo tome como hora local/as-is si es necesario)
+                objAux.fechaReg = fechaAjustada.toISOString().slice(0, -1);
+
+                //objAux.fechaReg = new Date().toUTCString()//today.toISOString();
                 objAux.horaRegistro = horaRegistro;
 
                 var jsonObject = JSON.stringify(objAux);
