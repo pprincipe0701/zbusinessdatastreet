@@ -386,6 +386,7 @@ sap.ui.define(
         objAux.flagCentroSalud = false;
         objAux.flagIglesia = false;
         objAux.flagAlquiler = false;
+        //objAux.flagUbicActual = false;
         oJsonModel.setData(objAux);
         oView.setModel(oJsonModel);
         
@@ -488,6 +489,7 @@ sap.ui.define(
         var id_zona = evt.getParameter("listItem").getBindingContext('modelEstablecimiento').getProperty('idMasterZona');
         var id_direccion = evt.getParameter("listItem").getBindingContext('modelEstablecimiento').getProperty('direccion');
         var idRubro = evt.getParameter("listItem").getBindingContext('modelEstablecimiento').getProperty('idRubro');
+        var otroRubro = evt.getParameter("listItem").getBindingContext('modelEstablecimiento').getProperty('otroRubro');
         var horaInicio = evt.getParameter("listItem").getBindingContext('modelEstablecimiento').getProperty('horarioApertura');
         var horaFinal = evt.getParameter("listItem").getBindingContext('modelEstablecimiento').getProperty('horarioCierre');
         //oView.byId('id_razon_social').setSelectedKey(idrazonSocial);
@@ -497,10 +499,11 @@ sap.ui.define(
         oView.byId('id_zona').setSelectedKey(id_zona);
         oView.byId('id_direccion').setValue(id_direccion);
         oView.byId('id_rubro').setSelectedKey(idRubro);
-        this.selectRubro();
+        oView.byId('id_otro_rubro').setValue(otroRubro);
         oView.byId('id_horario_apertura').setValue(horaInicio);
         oView.byId('id_horario_cierre').setValue(horaFinal);
         this.getView().getModel("ui").setProperty("/isEditable", false);
+        this.selectRubro(otroRubro);
         this.onCloseSearchEmpresa();
 
 
@@ -529,13 +532,19 @@ sap.ui.define(
         input.setValue(input.getValue().toUpperCase());
 
       },
-      selectRubro: function (evt) {
+      selectRubro: function (oRubro) {
         var oView = this.getView();
         var model = oView.getModel();
         var data = model.getData();
         var idRubro = data.idRubro;
-        if (idRubro === "31") data.visibleTextoRubro = true;
-        else data.visibleTextoRubro = false;
+        if (idRubro === "31") {
+          data.visibleTextoRubro = true;
+          //oView.byId('id_otro_rubro').setSelectedKey(oRubro);
+        }
+        else
+          {
+            data.visibleTextoRubro = false;
+          } 
         model.refresh(true);
       },
       selectDistrito: function (evt) {
@@ -913,7 +922,7 @@ sap.ui.define(
         return idUsuario;
       },
 
-      onSave: function (evt) {
+      onSave: async function (evt) {
         this.onCloseReview(evt);
         var self = this;
         //MessageBox.success('Pop up Review');
@@ -943,6 +952,11 @@ sap.ui.define(
                 }*/
 
         var email = "karolvalverdesalas@gmail.com";
+        const oResp = await 
+                   fetch(sap.ui.require.toUrl("nebula/com/zformulario") + "/user-api/currentUser");
+        const oUser = await oResp.json();
+                console.log(oUser.email);
+        email = oUser.email;
         var idUsuario = this.getCurrentUser(email);
         var objAux = {};
         /*Condicionar si check esta en true*/

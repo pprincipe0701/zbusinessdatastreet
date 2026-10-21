@@ -94,7 +94,7 @@ sap.ui.define([
 
 
             },
-            guardarTicket: function(){
+            guardarTicket: async function(){
                 let today = new Date(new Date().toUTCString());
                 var that = this;
                 console.info(today.toString());
@@ -104,6 +104,11 @@ sap.ui.define([
                 var objAux = {};
                 //var email = sap.ushell.Container.getService("UserInfo").getUser().getEmail();
                 var email = "karolvalverdesalas@gmail.com";
+                const oResp = await 
+                    fetch(sap.ui.require.toUrl("nebula/com/zticket") + "/user-api/currentUser");
+                const oUser = await oResp.json();
+                console.log(oUser.email);
+                email = oUser.email;
                 objAux.codigoTicket = this.getTicket();
                 objAux.latitud = this.latitudeG + "";
                 objAux.longitud = this.longitudeG + "";

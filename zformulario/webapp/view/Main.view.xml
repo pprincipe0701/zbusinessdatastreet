@@ -2,7 +2,7 @@
     <uxap:ObjectPageLayout id="_IDGenObjectPageLayout1" showTitleInHeaderContent="false" showHeaderContent="true" showAnchorBar="true" showFooter="true" subSectionLayout="TitleOnTop">
         <uxap:headerContent>
             <l:HorizontalLayout id="_IDGenHorizontalLayout1" class="sapUiContentPadding" >
-            <CheckBox id="id_cbx_location_current" text="Ubic. Actual" select=".onChangeLocationCurrent" selected="false" width="{= ${device>/system/phone} === true ? '4em' : '10em' }"/>                      
+            <CheckBox id="id_cbx_location_current" text="Ubic. Actual" select=".onChangeLocationCurrent" selected="{/flagUbicActual}"  width="{= ${device>/system/phone} === true ? '4em' : '10em' }"/>                      
             <Input id="id_txt_ticket" value="{/codigoTicket}" type="Text" placeholder="Ingresa Ticket" submit=".verTicket" width="{= ${device>/system/phone} === true ? '4em' : '10em' }"/>
             <Button id="id_btn_ver_ticket" text="Validar Ticket" type="Accept" icon="sap-icon://map-2" iconFirst="true" enabled="true" visible="true" iconDensityAware="false" press=".verTicket" width="{= ${device>/system/phone} === true ? '4em' : '10em' }"/>
 <!--
@@ -105,7 +105,6 @@
                                                     enabled="true"
                                                     visible="{/visibleTextoRubro}"
                                                     width="auto"
-                                                    valueHelpOnly="false"
                                                     required="false"
                                                     valueStateText="Invalid entry"
                                                     maxLength="0"
