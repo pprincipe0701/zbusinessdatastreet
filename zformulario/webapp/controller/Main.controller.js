@@ -1060,6 +1060,13 @@ sap.ui.define(
         });
       },
       onClear: function (evt) {
+        var oView = this.getView();
+        var model = oView.getModel();
+        var data = model.getData();
+        oView.byId("id_txt_ticket").setVisible(true);
+        oView.byId("id_btn_ver_ticket").setVisible(true);
+        data.codigoTicket = "";
+        model.refresh(true);
         this.generarModelo();
         this.nuevoEstablecimiento();
         this.getCurrentPositionInitial();
